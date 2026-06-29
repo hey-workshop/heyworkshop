@@ -1,0 +1,1325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Hey Workshop — The Complete Back Office for People Who Work for Themselves</title>
+<meta name="description" content="Hey Workshop builds research-backed systems for freelancers, consultants, and solo founders. Nearly 200 pages of playbooks plus 50+ done-for-you templates, trackers, and scripts — one system instead of a hundred browser tabs." />
+<link rel="icon" type="image/png" href="assets/icon-badge.png" />
+<meta property="og:title" content="Hey Workshop — The Complete Back Office for Solo Businesses" />
+<meta property="og:description" content="Stop running your business on duct tape and hope. Nearly 200 pages of research-backed playbooks + 50+ done-for-you templates, trackers and scripts." />
+<meta property="og:image" content="assets/icon-badge.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,500;1,600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&family=Playfair+Display:ital,wght@0,500;0,600;1,500;1,600&display=swap" rel="stylesheet" />
+<style>
+/* ============================================================
+   HEY WORKSHOP — editorial site (Vogue Business × Archrival inspired)
+   ============================================================ */
+:root{
+  --cream:#F8F4EB;
+  --cream-2:#FCF9F2;
+  --ink:#16161A;
+  --ink-soft:#43444C;
+  --ink-faint:#6b6c75;
+
+  --periwinkle:#6D83BD;
+  --peri-deep:#46589E;
+  --peri-royal:#3B4FA0;
+  --lightblue:#A3C6DA;
+  --imsg:#2F8DFB;
+
+  /* marker / wash colors */
+  --hl-blue:#9CC8EC;
+  --hl-peri:#A6B2E6;
+  --hl-lav:#DDC7F2;
+  --hl-mint:#B6ECC9;
+  --hl-pink:#F7C9DE;
+  --hl-lime:#CFF36B;
+
+  --maxw:1240px;
+  --gut:clamp(20px,5vw,90px);
+
+  --sans:'Montserrat',system-ui,sans-serif;
+  --serif:'Newsreader',Georgia,serif;
+  --script:'Playfair Display',Georgia,serif;
+
+  --shadow:0 40px 120px -40px rgba(40,46,90,.45);
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  font-family:var(--sans);
+  color:var(--ink);
+  /* darker backdrop so the cream "sheet" floats like the reference */
+  background:
+    radial-gradient(1200px 800px at 80% -10%, #5b6bb0 0%, transparent 55%),
+    radial-gradient(1000px 700px at 0% 30%, #7e8cc6 0%, transparent 50%),
+    #2c3568;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+
+/* ---- the floating sheet ---- */
+.sheet{
+  position:relative;
+  margin:0 auto;
+  max-width:1500px;
+  background:var(--cream);
+  border-radius:34px 34px 0 0;
+  box-shadow:var(--shadow);
+  overflow:hidden;
+  isolation:isolate;
+}
+@media (max-width:640px){ .sheet{border-radius:22px 22px 0 0} }
+
+/* ============ TYPOGRAPHY HELPERS ============ */
+.eyebrow{
+  font-family:var(--serif);
+  font-style:italic;
+  font-size:clamp(.85rem,1.4vw,1.05rem);
+  letter-spacing:.02em;
+  color:var(--peri-deep);
+}
+.kicker{
+  font-family:var(--sans);
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:.28em;
+  font-size:.72rem;
+  color:var(--ink-soft);
+}
+.source{
+  font-family:var(--serif);
+  font-style:italic;
+  text-transform:uppercase;
+  letter-spacing:.12em;
+  font-size:.72rem;
+  color:var(--ink-soft);
+}
+.serif-body{
+  font-family:var(--serif);
+  font-size:clamp(1.05rem,1.45vw,1.32rem);
+  line-height:1.62;
+  color:var(--ink-soft);
+}
+.serif-body p+p{margin-top:1.1em}
+
+.display{
+  font-family:var(--sans);
+  font-weight:800;
+  line-height:1.02;
+  letter-spacing:-.02em;
+}
+.script{
+  font-family:var(--script);
+  font-style:italic;
+  font-weight:500;
+  letter-spacing:0;
+}
+
+/* ============ MARKER HIGHLIGHT (animated wipe) ============ */
+.mk{
+  background-image:linear-gradient(var(--mkc,var(--hl-blue)),var(--mkc,var(--hl-blue)));
+  background-repeat:no-repeat;
+  background-position:0 82%;
+  background-size:0% 42%;
+  padding:0 .06em;
+  border-radius:2px;
+  transition:background-size .85s cubic-bezier(.16,.8,.3,1);
+  -webkit-box-decoration-break:clone;
+  box-decoration-break:clone;
+}
+.in .mk{background-size:100% 42%}
+.mk.tall{background-position:0 70%;background-size:0% 78%}
+.in .mk.tall{background-size:100% 78%}
+.m-blue{--mkc:var(--hl-blue)} .m-peri{--mkc:var(--hl-peri)}
+.m-lav{--mkc:var(--hl-lav)} .m-mint{--mkc:var(--hl-mint)}
+.m-pink{--mkc:var(--hl-pink)} .m-lime{--mkc:var(--hl-lime)}
+
+/* solid block highlight for giant words */
+.block-hl{
+  display:inline-block;
+  background:var(--bhc,var(--imsg));
+  color:#fff;
+  padding:.02em .22em .08em;
+  border-radius:.12em;
+  transform:rotate(-1.2deg);
+  box-shadow:0 16px 40px -20px rgba(0,0,0,.4);
+}
+
+/* ============ REVEAL MOTION ============ */
+[data-reveal]{opacity:0;transform:translateY(38px);transition:opacity .9s ease,transform 1s cubic-bezier(.16,.8,.3,1)}
+[data-reveal].in{opacity:1;transform:none}
+[data-reveal].d1{transition-delay:.08s}
+[data-reveal].d2{transition-delay:.16s}
+[data-reveal].d3{transition-delay:.24s}
+[data-reveal].d4{transition-delay:.32s}
+[data-reveal].d5{transition-delay:.40s}
+.pop{opacity:0;transform:scale(.7) translateY(20px);transition:opacity .6s ease,transform .7s cubic-bezier(.2,1.3,.4,1)}
+.pop.in{opacity:1;transform:none}
+/* automatic stagger for grouped children (robust to class order) */
+.modules-grid>*:nth-child(2),.numgrid>*:nth-child(2),.bubblestats>*:nth-child(2),.tcards>*:nth-child(2),.prices>*:nth-child(2),.hero-inner>*:nth-child(3){transition-delay:.09s}
+.modules-grid>*:nth-child(3),.numgrid>*:nth-child(3),.bubblestats>*:nth-child(3),.tcards>*:nth-child(3),.prices>*:nth-child(3),.hero-inner>*:nth-child(4){transition-delay:.17s}
+.modules-grid>*:nth-child(4),.numgrid>*:nth-child(4),.bubblestats>*:nth-child(4),.hero-inner>*:nth-child(5){transition-delay:.25s}
+.modules-grid>*:nth-child(5),.numgrid>*:nth-child(5),.hero-inner>*:nth-child(6){transition-delay:.33s}
+.modules-grid>*:nth-child(6){transition-delay:.41s}
+.modules-grid>*:nth-child(7){transition-delay:.49s}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  [data-reveal],.pop{opacity:1!important;transform:none!important}
+}
+
+/* ============ PIXEL SPRITES ============ */
+.px{position:absolute;width:90px;height:90px;color:var(--periwinkle);z-index:1;pointer-events:none;animation:floaty 7s ease-in-out infinite}
+.px rect{fill:currentColor}
+.px.g{color:#8fd99f}.px.b{color:#7fb3ec}.px.p{color:#b79be6}.px.pk{color:#f2a9c8}.px.pe{color:var(--periwinkle)}
+@keyframes floaty{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(-16px) rotate(6deg)}}
+@keyframes spin-slow{to{transform:rotate(360deg)}}
+
+/* ============ iMESSAGE BUBBLES ============ */
+.bubble{
+  position:relative;
+  display:inline-block;
+  max-width:340px;
+  padding:14px 20px;
+  border-radius:22px;
+  font-size:1rem;
+  font-weight:500;
+  line-height:1.35;
+  box-shadow:0 18px 40px -22px rgba(20,30,80,.5);
+}
+.bubble.sent{background:var(--imsg);color:#fff;border-bottom-right-radius:6px}
+.bubble.sent::after{content:"";position:absolute;right:-7px;bottom:0;width:22px;height:22px;background:var(--imsg);border-bottom-left-radius:16px;clip-path:path('M0 22 Q 12 22 22 12 Q 16 22 0 22 Z')}
+.bubble.recv{background:#fff;color:var(--ink);border-bottom-left-radius:6px}
+
+/* ============ NAV ============ */
+.nav{
+  position:fixed;top:0;left:0;right:0;z-index:60;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:18px clamp(18px,4vw,46px);
+  transition:padding .35s ease,background .35s ease,backdrop-filter .35s ease;
+  pointer-events:none;
+}
+.nav>*{pointer-events:auto}
+.nav.scrolled{
+  padding-top:11px;padding-bottom:11px;
+  background:rgba(248,244,235,.82);
+  backdrop-filter:saturate(140%) blur(14px);
+  box-shadow:0 1px 0 rgba(20,20,30,.06);
+}
+.brandlock{display:flex;align-items:center;gap:12px;height:30px}
+.brandlock img{height:26px;width:auto}
+.brandlock .slash{font-weight:800;letter-spacing:.12em;font-size:.7rem;color:var(--ink);text-transform:uppercase;border-left:1.5px solid rgba(20,20,30,.3);padding-left:12px}
+@media(max-width:560px){.brandlock .slash{display:none}.brandlock img{height:23px}}
+
+.menubtn{
+  display:flex;align-items:center;justify-content:center;gap:9px;
+  height:46px;padding:0 8px 0 20px;border-radius:30px;
+  background:var(--ink);color:#fff;border:none;cursor:pointer;
+  font-family:var(--sans);font-weight:600;font-size:.82rem;letter-spacing:.02em;
+  transition:transform .25s ease,background .25s ease;
+}
+.menubtn:hover{transform:translateY(-2px)}
+.menubtn .dot{display:flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:50%;background:#fff}
+.menubtn .dot span{display:block;width:13px;height:1.6px;background:var(--ink);position:relative}
+.menubtn .dot span::before,.menubtn .dot span::after{content:"";position:absolute;left:0;width:13px;height:1.6px;background:var(--ink)}
+.menubtn .dot span::before{top:-4px}.menubtn .dot span::after{top:4px}
+
+/* overlay menu */
+.overlay{
+  position:fixed;inset:0;z-index:70;
+  background:linear-gradient(160deg,#2f3a78,#46589e 60%,#6d83bd);
+  color:#fff;display:flex;flex-direction:column;
+  padding:clamp(24px,5vw,60px);
+  transform:translateY(-101%);transition:transform .6s cubic-bezier(.7,0,.2,1);
+}
+.overlay.open{transform:none}
+.overlay-top{display:flex;justify-content:space-between;align-items:center}
+.overlay-top img{height:26px}
+.closebtn{width:48px;height:48px;border-radius:50%;border:1.5px solid rgba(255,255,255,.5);background:transparent;color:#fff;font-size:1.4rem;cursor:pointer;transition:transform .3s ease,background .3s}
+.closebtn:hover{transform:rotate(90deg);background:rgba(255,255,255,.12)}
+.overlay nav{margin-top:auto;display:flex;flex-direction:column;gap:6px}
+.overlay nav a{font-family:var(--sans);font-weight:800;font-size:clamp(2rem,7vw,4.6rem);line-height:1.04;letter-spacing:-.02em;color:#fff;opacity:.92;transition:transform .3s ease,opacity .3s;width:fit-content}
+.overlay nav a:hover{transform:translateX(18px);opacity:1;color:#cde0f1}
+.overlay nav a .num{font-family:var(--serif);font-style:italic;font-size:.9rem;vertical-align:super;opacity:.6;margin-right:10px}
+.overlay-foot{margin-top:34px;display:flex;flex-wrap:wrap;gap:10px 28px;font-size:.85rem;opacity:.85;font-family:var(--serif)}
+
+/* ============ SECTION SCAFFOLD ============ */
+.section{position:relative;padding:clamp(80px,11vw,170px) var(--gut);overflow:hidden}
+.wrap{max-width:var(--maxw);margin:0 auto;position:relative;z-index:2}
+.center{text-align:center}
+.narrow{max-width:920px;margin-inline:auto}
+
+/* gradient washes */
+.w-peri{background:linear-gradient(180deg,var(--cream) 0%,#e4e8f6 45%,#cfd6ef 100%)}
+.w-sky{background:linear-gradient(180deg,#cfe0f1 0%,#eef3f8 60%,var(--cream) 100%)}
+.w-lav{background:linear-gradient(180deg,#ece4f6 0%,#f3eef9 55%,var(--cream) 100%)}
+.w-mint{background:linear-gradient(180deg,#dff1e6 0%,#eef7f0 60%,var(--cream) 100%)}
+.w-pink{background:linear-gradient(180deg,#f8e2ec 0%,#f9eef3 60%,var(--cream) 100%)}
+.w-cream{background:var(--cream)}
+
+/* ============ HERO ============ */
+.hero{
+  position:relative;min-height:100svh;display:flex;align-items:center;
+  padding:140px var(--gut) 90px;
+  background:
+    radial-gradient(900px 600px at 12% 18%, rgba(163,198,218,.55), transparent 60%),
+    radial-gradient(820px 620px at 88% 30%, rgba(221,199,242,.55), transparent 60%),
+    radial-gradient(900px 700px at 60% 100%, rgba(247,201,222,.5), transparent 60%),
+    linear-gradient(180deg,#eef0f8,#f8f4eb 75%);
+  background-size:200% 200%,200% 200%,200% 200%,100% 100%;
+  animation:heroDrift 22s ease-in-out infinite alternate;
+}
+@keyframes heroDrift{0%{background-position:0% 0%,100% 0%,50% 100%,0 0}100%{background-position:30% 20%,70% 30%,40% 80%,0 0}}
+.hero-inner{max-width:var(--maxw);margin:0 auto;width:100%;position:relative;z-index:3}
+.hero h1{
+  font-family:var(--sans);font-weight:800;letter-spacing:-.025em;line-height:.98;
+  font-size:clamp(2.7rem,8.4vw,7.4rem);margin:.18em 0 .12em;max-width:15ch;
+}
+.hero h1 .script{font-weight:500;letter-spacing:0;color:var(--peri-deep)}
+.hero-dek{max-width:54ch;margin-top:1.5rem}
+.cta-row{display:flex;flex-wrap:wrap;gap:14px;margin-top:2.4rem;align-items:center}
+.btn{
+  font-family:var(--sans);font-weight:700;font-size:1rem;cursor:pointer;border:none;
+  padding:18px 30px;border-radius:40px;display:inline-flex;align-items:center;gap:10px;
+  transition:transform .25s cubic-bezier(.2,1.2,.4,1),box-shadow .25s,background .25s;
+}
+.btn-primary{background:var(--ink);color:#fff;box-shadow:0 20px 44px -20px rgba(20,20,40,.7)}
+.btn-primary:hover{transform:translateY(-3px) scale(1.02);background:var(--peri-royal)}
+.btn-primary .price{background:rgba(255,255,255,.18);padding:3px 11px;border-radius:20px;font-size:.85rem}
+.btn-primary .price s{opacity:.6;margin-right:6px;font-weight:500}
+.btn-ghost{background:transparent;color:var(--ink);border:1.6px solid rgba(20,20,30,.25)}
+.btn-ghost:hover{transform:translateY(-3px);border-color:var(--ink)}
+.hero-meta{margin-top:1.5rem;display:flex;flex-wrap:wrap;gap:8px 22px;font-family:var(--serif);font-style:italic;color:var(--ink-soft);font-size:.95rem}
+.hero-meta span{display:inline-flex;align-items:center;gap:7px}
+.hero-meta b{color:var(--peri-deep);font-style:normal;font-family:var(--sans);font-weight:700}
+
+.hero-sticker{position:absolute;z-index:4;right:max(2vw,8px);top:24%;display:flex;flex-direction:column;gap:14px;align-items:flex-end;animation:floaty 6s ease-in-out infinite}
+@media(max-width:900px){.hero-sticker{display:none}}
+.badge-sticker{width:118px;transform:rotate(8deg);filter:drop-shadow(0 24px 40px rgba(40,50,110,.4));border-radius:26px}
+
+.scrollcue{position:absolute;left:50%;bottom:26px;transform:translateX(-50%);z-index:4;font-family:var(--serif);font-style:italic;color:var(--ink-soft);font-size:.85rem;display:flex;flex-direction:column;align-items:center;gap:8px}
+.scrollcue .line{width:1.5px;height:42px;background:linear-gradient(var(--peri-deep),transparent);animation:cue 1.8s ease-in-out infinite}
+@keyframes cue{0%,100%{transform:scaleY(.4);opacity:.4;transform-origin:top}50%{transform:scaleY(1);opacity:1;transform-origin:top}}
+
+/* ============ BIG STATEMENT ============ */
+.statement{
+  font-family:var(--sans);font-weight:700;letter-spacing:-.018em;line-height:1.12;
+  font-size:clamp(1.7rem,4.4vw,3.5rem);
+}
+.statement.lg{font-size:clamp(2rem,6vw,4.6rem);font-weight:800;line-height:1.04}
+
+/* giant marker word block (doomshopping-style) */
+.giant{
+  font-family:var(--sans);font-weight:800;letter-spacing:-.03em;line-height:.92;text-align:center;
+}
+.giant .top{display:block;font-size:clamp(1.2rem,3.4vw,2.4rem);letter-spacing:.34em;text-transform:uppercase;font-weight:700;margin-bottom:.18em;color:var(--ink-soft)}
+.giant .big{font-size:clamp(3rem,13vw,11rem)}
+
+/* ============ TWO-COLUMN EDITORIAL ============ */
+.cols{display:grid;grid-template-columns:1.05fr 1fr;gap:clamp(30px,5vw,80px);align-items:start}
+@media(max-width:860px){.cols{grid-template-columns:1fr;gap:34px}}
+.cols .lead{font-family:var(--sans);font-weight:700;font-size:clamp(1.6rem,3.4vw,2.6rem);line-height:1.12;letter-spacing:-.02em}
+
+/* leaks list */
+.leaks{list-style:none;margin-top:1.4rem;display:flex;flex-direction:column;gap:1rem}
+.leaks li{font-family:var(--serif);font-size:clamp(1.05rem,1.5vw,1.28rem);line-height:1.5;padding-left:34px;position:relative;color:var(--ink-soft)}
+.leaks li::before{content:"";position:absolute;left:0;top:.55em;width:14px;height:14px;background:var(--periwinkle);border-radius:3px;transform:rotate(45deg)}
+.leaks li b{color:var(--ink);font-family:var(--sans);font-weight:600}
+
+/* collage circle */
+.collage{position:relative;aspect-ratio:1/1;display:flex;align-items:center;justify-content:center}
+.collage .disc{width:80%;aspect-ratio:1;border-radius:50%;background:
+  radial-gradient(circle at 35% 30%, #fff 0%, rgba(255,255,255,0) 38%),
+  conic-gradient(from 210deg, var(--periwinkle), var(--lightblue), var(--hl-lav), var(--hl-pink), var(--periwinkle));
+  box-shadow:0 30px 80px -30px rgba(70,88,158,.6);animation:spin-slow 60s linear infinite}
+.collage .disc-inner{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+.collage .disc-inner img{width:42%;filter:drop-shadow(0 14px 24px rgba(0,0,0,.25))}
+
+/* ============ MODULES ============ */
+.modules-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:3rem}
+@media(max-width:760px){.modules-grid{grid-template-columns:1fr}}
+.mod{
+  position:relative;background:var(--cream-2);border:1.5px solid rgba(70,88,158,.14);
+  border-radius:22px;padding:30px 30px 28px;overflow:hidden;
+  transition:transform .4s cubic-bezier(.16,.8,.3,1),box-shadow .4s,border-color .4s;
+}
+.mod::before{content:"";position:absolute;inset:0;background:var(--modwash,linear-gradient(135deg,rgba(163,198,218,.3),transparent 60%));opacity:0;transition:opacity .4s;z-index:0}
+.mod:hover{transform:translateY(-8px) rotate(-.4deg);box-shadow:0 40px 80px -40px rgba(70,88,158,.55);border-color:transparent}
+.mod:hover::before{opacity:1}
+.mod>*{position:relative;z-index:1}
+.mod .n{font-family:var(--serif);font-style:italic;font-size:1.05rem;color:var(--peri-deep)}
+.mod h3{font-family:var(--sans);font-weight:800;font-size:clamp(1.25rem,2.3vw,1.7rem);letter-spacing:-.02em;margin:.5rem 0 .5rem;line-height:1.05}
+.mod p{font-family:var(--serif);font-size:1.02rem;line-height:1.5;color:var(--ink-soft)}
+.mod .tag{display:inline-block;margin-top:1rem;font-family:var(--sans);font-weight:600;font-size:.74rem;letter-spacing:.04em;text-transform:uppercase;color:var(--peri-deep);background:rgba(109,131,189,.13);padding:7px 13px;border-radius:30px}
+.mod.feature{grid-column:1/-1;background:linear-gradient(120deg,#46589e,#6d83bd);color:#fff;border:none}
+.mod.feature .n,.mod.feature p,.mod.feature .tag{color:rgba(255,255,255,.9)}
+.mod.feature .tag{background:rgba(255,255,255,.18)}
+.mod.feature::before{display:none}
+
+/* ============ STAT BUBBLES ROW ============ */
+.bubblestats{display:flex;flex-direction:column;gap:30px;margin-top:2.6rem;max-width:760px}
+.bstat{display:flex;align-items:center;gap:24px}
+.bstat:nth-child(even){flex-direction:row-reverse;justify-content:flex-end}
+.bstat .num{font-family:var(--sans);font-weight:800;font-size:clamp(2.4rem,6vw,4.4rem);letter-spacing:-.03em;line-height:1}
+.bstat .num small{display:block;font-family:var(--serif);font-style:italic;font-size:.95rem;font-weight:400;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-soft);margin-top:.3rem}
+
+/* ============ BIG NUMBER STATS ============ */
+.numgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:20px;margin-top:3rem}
+@media(max-width:880px){.numgrid{grid-template-columns:repeat(2,1fr);gap:30px 20px}}
+.numcell{text-align:center}
+.numcell .icn{font-size:2rem;margin-bottom:.4rem}
+.numcell .v{font-family:var(--sans);font-weight:800;font-size:clamp(2.2rem,4.5vw,3.4rem);letter-spacing:-.03em;line-height:1;color:var(--ink)}
+.numcell .l{font-family:var(--serif);font-size:.98rem;color:var(--ink-soft);margin-top:.45rem;line-height:1.35}
+
+/* ============ VALUE BAR CHART ============ */
+.chart{margin-top:3rem;display:flex;align-items:flex-end;gap:clamp(30px,8vw,90px);justify-content:center;min-height:300px}
+.bar-col{text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:flex-end}
+.bar-col .v{font-family:var(--sans);font-weight:800;font-size:clamp(1.8rem,4vw,3rem);letter-spacing:-.02em;margin-bottom:.4rem}
+.bar{width:clamp(90px,16vw,180px);border-radius:16px 16px 0 0;height:0;transition:height 1.3s cubic-bezier(.16,.8,.3,1);box-shadow:inset 0 0 0 1px rgba(255,255,255,.3)}
+.in .bar{height:var(--h)}
+.bar.b1{background:linear-gradient(180deg,#cdd7f1,#a9b8e6)}
+.bar.b2{background:linear-gradient(180deg,#6d83bd,#46589e)}
+.bar-col .lab{font-family:var(--serif);font-style:italic;margin-top:.7rem;color:var(--ink-soft);font-size:1rem}
+
+/* ============ MARQUEE ============ */
+.marquee{overflow:hidden;white-space:nowrap;-webkit-mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.marquee .track{display:inline-flex;gap:54px;align-items:center;animation:marq 28s linear infinite;will-change:transform}
+.marquee .track span{font-family:var(--serif);font-style:italic;font-size:clamp(1.1rem,2.4vw,1.9rem);color:var(--ink-soft)}
+.marquee .track .dot{width:9px;height:9px;border-radius:50%;background:var(--periwinkle);flex:none}
+@keyframes marq{to{transform:translateX(-50%)}}
+
+/* ============ QUOTE ============ */
+.quote{max-width:980px;margin:0 auto;text-align:center}
+.quote q{font-family:var(--sans);font-weight:700;font-size:clamp(1.6rem,4vw,3rem);line-height:1.16;letter-spacing:-.02em;quotes:'“' '”'}
+.quote .by{margin-top:2rem;display:flex;gap:14px;align-items:center;justify-content:center}
+.quote .by .av{width:54px;height:54px;border-radius:50%;background:conic-gradient(from 120deg,var(--periwinkle),var(--lightblue),var(--hl-lav),var(--periwinkle))}
+.quote .by .who{text-align:left;font-family:var(--serif)}
+.quote .by .who b{display:block;font-family:var(--sans);font-weight:700;font-size:1rem}
+.quote .by .who span{font-style:italic;color:var(--ink-soft);font-size:.92rem}
+
+/* testimonial mini cards */
+.tcards{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:3rem}
+@media(max-width:820px){.tcards{grid-template-columns:1fr}}
+.tcard{background:#fff;border-radius:22px;padding:26px;box-shadow:0 30px 60px -40px rgba(70,88,158,.5)}
+.tcard .b{background:var(--imsg);color:#fff;border-radius:20px 20px 20px 6px;padding:16px 18px;font-weight:500;line-height:1.4;font-size:1rem}
+.tcard .who{margin-top:16px;display:flex;align-items:center;gap:11px}
+.tcard .who .av{width:40px;height:40px;border-radius:50%;background:conic-gradient(from 90deg,var(--lightblue),var(--periwinkle),var(--hl-lav),var(--lightblue))}
+.tcard .who b{font-family:var(--sans);font-weight:700;font-size:.92rem}
+.tcard .who span{display:block;font-family:var(--serif);font-style:italic;color:var(--ink-soft);font-size:.84rem}
+
+/* ============ PRICING ============ */
+.prices{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:3rem;align-items:stretch}
+@media(max-width:880px){.prices{grid-template-columns:1fr;max-width:460px;margin-inline:auto}}
+.price-card{
+  position:relative;display:flex;flex-direction:column;background:var(--cream-2);
+  border:1.6px solid rgba(70,88,158,.16);border-radius:26px;padding:32px 28px 30px;
+  transition:transform .4s cubic-bezier(.16,.8,.3,1),box-shadow .4s;
+}
+.price-card:hover{transform:translateY(-8px);box-shadow:0 50px 90px -50px rgba(70,88,158,.6)}
+.price-card .eyebrow{margin-bottom:.4rem}
+.price-card h3{font-family:var(--sans);font-weight:800;font-size:1.5rem;letter-spacing:-.02em;line-height:1.05}
+.price-card .tagline{font-family:var(--serif);color:var(--ink-soft);margin:.5rem 0 1.2rem;font-size:1.02rem;line-height:1.4}
+.price-card .amt{font-family:var(--sans);font-weight:800;font-size:3rem;letter-spacing:-.03em;line-height:1}
+.price-card .amt s{font-size:1.3rem;color:var(--ink-faint);font-weight:500;margin-right:10px}
+.price-card .amt em{font-style:normal;font-size:.95rem;color:var(--ink-soft);font-weight:500;font-family:var(--serif)}
+.price-card ul{list-style:none;margin:1.4rem 0 1.8rem;display:flex;flex-direction:column;gap:.7rem}
+.price-card li{font-family:var(--serif);font-size:1rem;line-height:1.4;padding-left:26px;position:relative;color:var(--ink-soft)}
+.price-card li::before{content:"";position:absolute;left:0;top:.45em;width:13px;height:9px;border-left:2.4px solid var(--periwinkle);border-bottom:2.4px solid var(--periwinkle);transform:rotate(-45deg)}
+.price-card .buy{margin-top:auto;text-align:center;padding:16px;border-radius:30px;font-family:var(--sans);font-weight:700;background:var(--ink);color:#fff;transition:transform .25s,background .25s}
+.price-card .buy:hover{transform:translateY(-2px);background:var(--peri-royal)}
+.price-card.feat{background:linear-gradient(150deg,#46589e,#6d83bd);color:#fff;border:none;box-shadow:0 50px 100px -50px rgba(70,88,158,.8);transform:translateY(-10px)}
+@media(max-width:880px){.price-card.feat{transform:none}}
+.price-card.feat .eyebrow,.price-card.feat .tagline,.price-card.feat li,.price-card.feat .amt em{color:rgba(255,255,255,.92)}
+.price-card.feat li::before{border-color:#fff}
+.price-card.feat .amt s{color:rgba(255,255,255,.6)}
+.price-card.feat .buy{background:#fff;color:var(--peri-royal)}
+.price-card.feat .buy:hover{background:var(--cream)}
+.tagb{position:absolute;top:-13px;right:22px;background:var(--hl-lime);color:var(--ink);font-family:var(--sans);font-weight:800;font-size:.68rem;letter-spacing:.1em;text-transform:uppercase;padding:7px 14px;border-radius:30px;box-shadow:0 10px 22px -10px rgba(0,0,0,.4)}
+.pay-note{text-align:center;margin-top:2rem;font-family:var(--serif);font-style:italic;color:var(--ink-soft)}
+
+/* ============ GUARANTEE ============ */
+.guarantee{max-width:760px;margin:0 auto;text-align:center;background:#fff;border-radius:30px;padding:clamp(36px,6vw,64px);box-shadow:0 50px 100px -60px rgba(70,88,158,.55)}
+.guarantee .seal{width:84px;height:84px;border-radius:50%;margin:0 auto 1.4rem;background:radial-gradient(circle at 35% 30%,#fff,var(--lightblue));display:flex;align-items:center;justify-content:center;font-family:var(--sans);font-weight:800;color:var(--peri-royal);line-height:1;font-size:.8rem;text-align:center;box-shadow:0 18px 40px -18px rgba(70,88,158,.6)}
+.guarantee h2{font-family:var(--sans);font-weight:800;font-size:clamp(1.8rem,4vw,2.8rem);letter-spacing:-.02em}
+.guarantee p{font-family:var(--serif);font-size:clamp(1.05rem,1.5vw,1.25rem);line-height:1.55;color:var(--ink-soft);margin-top:1rem}
+
+/* ============ FINAL CTA ============ */
+.final{
+  position:relative;text-align:center;color:#fff;overflow:hidden;
+  background:
+   radial-gradient(800px 500px at 20% 10%,rgba(163,198,218,.5),transparent 60%),
+   radial-gradient(700px 500px at 85% 90%,rgba(221,199,242,.45),transparent 60%),
+   linear-gradient(150deg,#2f3a78,#46589e 55%,#6d83bd);
+}
+.final h2{font-family:var(--sans);font-weight:800;font-size:clamp(2.2rem,7vw,5.4rem);line-height:1;letter-spacing:-.03em;max-width:16ch;margin:0 auto}
+.final p{max-width:62ch;margin:1.6rem auto 0;font-family:var(--serif);font-size:clamp(1.05rem,1.6vw,1.3rem);line-height:1.55;color:rgba(255,255,255,.9)}
+.final .btn-primary{background:#fff;color:var(--peri-royal);margin-top:2.4rem}
+.final .btn-primary:hover{background:var(--cream)}
+.final .mk{color:#fff}
+
+/* ============ FOOTER ============ */
+.footer{background:#161a32;color:#cfd5ea;padding:clamp(60px,8vw,100px) var(--gut) 40px}
+.footer-grid{max-width:var(--maxw);margin:0 auto;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px}
+@media(max-width:760px){.footer-grid{grid-template-columns:1fr;gap:34px}}
+.footer img{height:28px;margin-bottom:1.2rem}
+.footer p{font-family:var(--serif);line-height:1.6;color:#9aa2c6;max-width:40ch}
+.footer h4{font-family:var(--sans);font-weight:700;font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;color:#fff;margin-bottom:1rem}
+.footer ul{list-style:none;display:flex;flex-direction:column;gap:.7rem}
+.footer a{color:#b9c0de;transition:color .2s}
+.footer a:hover{color:#fff}
+.footer-bottom{max-width:var(--maxw);margin:48px auto 0;padding-top:24px;border-top:1px solid rgba(255,255,255,.1);display:flex;flex-wrap:wrap;justify-content:space-between;gap:14px;font-size:.85rem;color:#7e86ac;font-family:var(--serif)}
+
+/* ============ STICKY CTA PILL ============ */
+.sticky-cta{
+  position:fixed;left:50%;bottom:22px;translate:-50% 140%;z-index:55;
+  background:var(--ink);color:#fff;border-radius:40px;padding:13px 14px 13px 24px;
+  display:flex;align-items:center;gap:16px;box-shadow:0 24px 50px -20px rgba(20,20,40,.7);
+  transition:translate .5s cubic-bezier(.2,1,.3,1);font-family:var(--sans);
+}
+.sticky-cta.show{translate:-50% 0}
+.sticky-cta b{font-weight:700;font-size:.92rem}
+.sticky-cta s{opacity:.55;font-weight:400;margin-right:5px}
+.sticky-cta .go{background:var(--hl-lime);color:var(--ink);font-weight:800;font-size:.86rem;padding:10px 18px;border-radius:30px;transition:transform .2s}
+.sticky-cta .go:hover{transform:scale(1.05)}
+@media(max-width:520px){.sticky-cta .lbl{display:none}.sticky-cta{padding-left:18px}}
+
+.dim{color:var(--ink-soft)}
+
+/* ===== full-bleed pixel-art background ===== */
+.pixbg{position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.5;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cg fill='%239cc8ec'%3E%3Crect x='0' y='16' width='16' height='16'/%3E%3Crect x='16' y='48' width='16' height='16'/%3E%3Crect x='32' y='0' width='16' height='16'/%3E%3Crect x='48' y='32' width='16' height='16'/%3E%3Crect x='64' y='16' width='16' height='16'/%3E%3Crect x='64' y='64' width='16' height='16'/%3E%3Crect x='16' y='16' width='16' height='16'/%3E%3Crect x='32' y='64' width='16' height='16'/%3E%3C/g%3E%3C/svg%3E");
+  background-size:78px 78px;animation:pixdrift 50s linear infinite;
+  -webkit-mask:radial-gradient(125% 95% at 50% 42%, transparent 26%, #000 80%);
+  mask:radial-gradient(125% 95% at 50% 42%, transparent 26%, #000 80%);}
+@keyframes pixdrift{to{background-position:156px 78px}}
+
+/* pixel divider band */
+.pixdiv{height:50px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Cg fill='%23a6b2e6'%3E%3Crect x='0' y='16' width='16' height='16'/%3E%3Crect x='16' y='48' width='16' height='16'/%3E%3Crect x='32' y='0' width='16' height='16'/%3E%3Crect x='48' y='32' width='16' height='16'/%3E%3Crect x='64' y='16' width='16' height='16'/%3E%3Crect x='16' y='16' width='16' height='16'/%3E%3C/g%3E%3C/svg%3E");
+  background-size:50px 50px;opacity:.55;
+  -webkit-mask:linear-gradient(90deg,transparent,#000 18%,#000 82%,transparent);mask:linear-gradient(90deg,transparent,#000 18%,#000 82%,transparent)}
+
+/* ===== assemble collage ===== */
+.collage-stage{position:relative;max-width:1040px;margin:3.5rem auto 0;min-height:560px}
+@media(max-width:760px){.collage-stage{min-height:auto;display:flex;flex-wrap:wrap;gap:16px;justify-content:center}}
+.stage-center{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);text-align:center;z-index:3}
+@media(max-width:760px){.stage-center{position:static;transform:none;order:-1;width:100%}}
+.stage-badge{width:118px;border-radius:28px;margin:0 auto;filter:drop-shadow(0 26px 50px rgba(70,88,158,.45));animation:floaty 6s ease-in-out infinite}
+.stage-label{display:block;margin-top:.7rem;font-family:var(--sans);font-weight:800;letter-spacing:-.01em;font-size:1.1rem}
+.cut{position:absolute;background:#fff;border-radius:18px;box-shadow:0 30px 60px -30px rgba(40,46,90,.45);padding:16px;width:210px;z-index:2;border:1px solid rgba(70,88,158,.1)}
+@media(max-width:760px){.cut{position:static!important;width:46%;animation:none!important;transform:none!important}.c-bub{display:none}}
+.cut.float{animation:floaty 7s ease-in-out infinite}
+.c-dash{left:0;top:7%;transform:rotate(-5deg)}
+.c-invoice{right:1%;top:0;transform:rotate(4deg)}
+.c-contract{right:5%;bottom:5%;transform:rotate(-3deg)}
+.c-note{left:5%;bottom:7%;transform:rotate(6deg)}
+.c-chip{left:50%;top:-5%;transform:translateX(-50%) rotate(-2deg)}
+.c-bub{position:absolute;right:28%;bottom:-2%;z-index:4}
+.cut .ct{font-family:var(--sans);font-weight:700;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--peri-deep)}
+.cut .big{display:block;font-family:var(--sans);font-weight:800;font-size:1.5rem;letter-spacing:-.02em;margin-top:.3rem}
+.cut .lines{margin-top:.6rem;display:flex;flex-direction:column;gap:6px}
+.cut .lines i{height:7px;border-radius:4px;background:rgba(70,88,158,.16);display:block}
+.minibars{display:flex;align-items:flex-end;gap:7px;height:62px;margin-top:.6rem}
+.minibars span{flex:1;border-radius:5px 5px 0 0;background:linear-gradient(var(--periwinkle),var(--peri-deep))}
+.note{background:var(--hl-lime)!important;border:none!important}
+.note .nt{font-family:var(--script);font-style:italic;font-size:1.18rem;line-height:1.2;display:block}
+.stamp{display:inline-block;margin-top:.55rem;border:2px solid #d3496b;color:#d3496b;font-family:var(--sans);font-weight:800;font-size:.7rem;letter-spacing:.1em;padding:3px 8px;border-radius:6px;transform:rotate(-8deg);opacity:.85}
+.sigline{font-family:var(--script);font-style:italic;font-size:1.3rem;color:var(--peri-deep);border-bottom:1.5px solid rgba(70,88,158,.25);width:72%;margin-top:.4rem}
+.chip-pill{background:var(--ink)!important;color:#fff;border-radius:30px!important;width:auto!important;padding:13px 22px!important;font-family:var(--sans);font-weight:700;font-size:.92rem;border:none!important}
+
+/* ===== FAQ accordion ===== */
+.faq-list{margin-top:2.4rem;display:flex;flex-direction:column;gap:12px}
+.faq-list details{background:#fff;border-radius:18px;padding:2px 24px;box-shadow:0 24px 50px -40px rgba(70,88,158,.5);border:1px solid rgba(70,88,158,.1)}
+.faq-list summary{list-style:none;cursor:pointer;padding:22px 0;display:flex;justify-content:space-between;align-items:center;gap:20px;font-family:var(--sans);font-weight:700;font-size:clamp(1.05rem,1.8vw,1.3rem)}
+.faq-list summary::-webkit-details-marker{display:none}
+.faq-list summary .ic{flex:none;width:30px;height:30px;border-radius:50%;background:rgba(109,131,189,.14);position:relative;transition:background .3s}
+.faq-list summary .ic::before,.faq-list summary .ic::after{content:"";position:absolute;left:50%;top:50%;width:12px;height:2px;background:var(--peri-deep);transform:translate(-50%,-50%)}
+.faq-list summary .ic::after{transform:translate(-50%,-50%) rotate(90deg);transition:transform .3s}
+.faq-list details[open] summary .ic{background:var(--periwinkle)}
+.faq-list details[open] summary .ic::before,.faq-list details[open] summary .ic::after{background:#fff}
+.faq-list details[open] summary .ic::after{transform:translate(-50%,-50%) rotate(0)}
+.faq-list .ans{padding:0 0 24px;font-family:var(--serif);font-size:1.08rem;line-height:1.6;color:var(--ink-soft);max-width:62ch}
+.faq-list details[open] .ans{animation:fadeIn .5s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+
+/* ===== ghost background word ===== */
+.ghostword{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);font-family:var(--sans);font-weight:900;letter-spacing:-.03em;font-size:clamp(8rem,26vw,24rem);color:rgba(70,88,158,.06);z-index:0;pointer-events:none;white-space:nowrap;line-height:1}
+
+/* ===== Before / After toggle ===== */
+.switchwrap{display:flex;justify-content:center;margin:2.6rem 0}
+.switch{display:inline-flex;background:rgba(70,88,158,.12);border-radius:40px;padding:5px;position:relative}
+.switch button{position:relative;z-index:2;border:none;background:transparent;cursor:pointer;font-family:var(--sans);font-weight:700;font-size:clamp(.85rem,1.6vw,1.05rem);padding:13px 26px;border-radius:34px;color:var(--ink-soft);transition:color .3s}
+.switch button.on{color:#fff}
+.switch .glider{position:absolute;z-index:1;top:5px;bottom:5px;left:5px;width:calc(50% - 5px);background:var(--ink);border-radius:34px;transition:transform .4s cubic-bezier(.4,1.3,.5,1),background .4s}
+.switch[data-mode="after"] .glider{transform:translateX(100%);background:var(--peri-royal)}
+.swapwrap{max-width:880px;margin:0 auto}
+.swap{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;animation:fadeIn .5s ease}
+@media(max-width:640px){.swap{grid-template-columns:1fr}}
+.swap[hidden]{display:none}
+.swapcard{background:#fff;border-radius:20px;padding:24px 26px;box-shadow:0 30px 60px -40px rgba(70,88,158,.5);border:1px solid rgba(70,88,158,.1)}
+.swapcard.bad{background:#fbeef0;border-color:#f3d3da}
+.swapcard .big{font-family:var(--sans);font-weight:800;font-size:clamp(1.8rem,3.6vw,2.6rem);letter-spacing:-.02em;line-height:1}
+.swapcard.bad .big{color:#c2415f}.swapcard.good .big{color:var(--peri-royal)}
+.swapcard p{font-family:var(--serif);font-size:1.04rem;line-height:1.45;color:var(--ink-soft);margin-top:.5rem}
+
+/* ===== Finance OS dashboard mockup ===== */
+.dashwrap{max-width:980px;margin:3rem auto 0}
+.dashmock{background:#fff;border-radius:16px;box-shadow:0 50px 110px -50px rgba(40,46,90,.6);border:1px solid rgba(70,88,158,.12);overflow:hidden;transition:transform .5s ease}
+.dashwrap:hover .dashmock{transform:translateY(-6px)}
+.dashbar{display:flex;align-items:center;gap:7px;padding:12px 16px;background:#eef1f8;border-bottom:1px solid rgba(70,88,158,.12)}
+.dashbar .dot{width:11px;height:11px;border-radius:50%}
+.dashbar .t{margin-left:14px;font-family:var(--sans);font-weight:700;font-size:.8rem;color:var(--ink-soft)}
+.dashtabs{display:flex;gap:4px;padding:10px 14px 0;background:#f5f7fc;overflow-x:auto}
+.dashtabs span{font-family:var(--sans);font-weight:600;font-size:.74rem;padding:8px 14px;border-radius:8px 8px 0 0;color:var(--ink-soft);white-space:nowrap}
+.dashtabs span.act{background:#fff;color:var(--peri-royal);box-shadow:0 -1px 0 rgba(70,88,158,.1)}
+.dashbody{display:grid;grid-template-columns:1.2fr 1fr;gap:0}
+@media(max-width:640px){.dashbody{grid-template-columns:1fr}}
+.dashL{padding:22px 24px;border-right:1px solid rgba(70,88,158,.1)}
+.dashR{padding:22px 24px;background:#fafbfe}
+.kpi{display:flex;gap:18px;flex-wrap:wrap;margin-bottom:18px}
+.kpi .k{flex:1;min-width:120px}
+.kpi .k .lab{font-family:var(--sans);font-weight:600;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint)}
+.kpi .k .val{font-family:var(--sans);font-weight:800;font-size:clamp(1.4rem,2.6vw,1.9rem);letter-spacing:-.02em;margin-top:.2rem}
+.kpi .k .val.up{color:#1f9d63}.kpi .k .val.peri{color:var(--peri-royal)}
+.dashchart{display:flex;align-items:flex-end;gap:9px;height:130px;margin-top:6px}
+.dashchart span{flex:1;border-radius:5px 5px 0 0;background:linear-gradient(180deg,var(--periwinkle),var(--peri-deep));height:0;transition:height 1.1s cubic-bezier(.16,.8,.3,1)}
+.in .dashchart span{height:var(--h)}
+.sheetrow{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:8px;padding:9px 0;border-bottom:1px solid rgba(70,88,158,.1);font-family:var(--sans);font-size:.82rem}
+.sheetrow.head{font-weight:700;color:var(--ink-faint);font-size:.66rem;letter-spacing:.08em;text-transform:uppercase}
+.sheetrow .pos{color:#1f9d63;font-weight:700;text-align:right}
+.sheetrow .neg{color:#c2415f;font-weight:700;text-align:right}
+.dashtag{display:inline-block;margin-top:14px;font-family:var(--sans);font-weight:700;font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;color:var(--peri-deep);background:rgba(109,131,189,.13);padding:7px 13px;border-radius:30px}
+
+/* ===== group chat testimonial thread ===== */
+.thread{max-width:620px;margin:3rem auto 0;display:flex;flex-direction:column;gap:14px}
+.thread .row{display:flex;gap:11px;align-items:flex-end;max-width:88%}
+.thread .row.me{align-self:flex-end;flex-direction:row-reverse}
+.thread .av{flex:none;width:38px;height:38px;border-radius:50%;background:conic-gradient(from 120deg,var(--periwinkle),var(--lightblue),var(--hl-lav),var(--periwinkle))}
+.thread .msg{padding:13px 17px;border-radius:20px;font-weight:500;line-height:1.4;font-size:1rem}
+.thread .row.you .msg{background:#fff;color:var(--ink);border-bottom-left-radius:6px;box-shadow:0 16px 36px -26px rgba(20,30,80,.5)}
+.thread .row.me .msg{background:var(--imsg);color:#fff;border-bottom-right-radius:6px}
+.thread .nm{font-family:var(--serif);font-style:italic;font-size:.78rem;color:var(--ink-faint);margin:0 0 3px 4px}
+
+/* ===== which would you rather (A/B) ===== */
+.ab{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,4vw,40px);margin-top:3rem;align-items:end;max-width:860px;margin-inline:auto}
+.abcol{text-align:center}
+.abcol .cap{font-family:var(--serif);font-size:1.05rem;color:var(--ink-soft);margin-bottom:.8rem;min-height:3em;display:flex;align-items:flex-end;justify-content:center}
+.abbar{border-radius:16px 16px 0 0;height:0;transition:height 1.3s cubic-bezier(.16,.8,.3,1);display:flex;align-items:flex-start;justify-content:center;padding-top:16px}
+.in .abbar{height:var(--h)}
+.abbar.lose{background:linear-gradient(180deg,#e3b9c6,#cf8ea3)}
+.abbar.win{background:linear-gradient(180deg,#6d83bd,#46589e)}
+.abbar .v{font-family:var(--sans);font-weight:800;font-size:clamp(1.8rem,4vw,3rem);color:#fff}
+.abcol .lab{font-family:var(--sans);font-weight:700;margin-top:.7rem;font-size:1.05rem}
+
+/* ===== donut ===== */
+.donutwrap{display:flex;align-items:center;justify-content:center;gap:clamp(20px,5vw,60px);flex-wrap:wrap;margin-top:1rem}
+.donut{--p:62;width:200px;height:200px;border-radius:50%;background:conic-gradient(var(--peri-deep) calc(var(--p)*1%),#dfe4f4 0);display:flex;align-items:center;justify-content:center;position:relative;transition:--p 1.4s ease}
+.donut::after{content:"";position:absolute;width:62%;height:62%;background:var(--cream);border-radius:50%}
+.donut .c{position:relative;z-index:2;text-align:center}
+.donut .c b{font-family:var(--sans);font-weight:800;font-size:2rem;display:block;letter-spacing:-.02em}
+.donut .c span{font-family:var(--serif);font-style:italic;font-size:.8rem;color:var(--ink-soft)}
+.donut-legend{text-align:left;font-family:var(--serif);font-size:1.05rem;line-height:1.7;color:var(--ink-soft);max-width:30ch}
+.donut-legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:8px;vertical-align:middle}
+
+/* ===== pixel sparkline rows ===== */
+.sparks{margin-top:2.4rem;display:flex;flex-direction:column;gap:18px;max-width:880px;margin-inline:auto}
+.sparkrow{display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center}
+.sparkrow .lbl{font-family:var(--sans);font-weight:600;font-size:clamp(.95rem,1.7vw,1.15rem)}
+.sparktrack{grid-column:1/-1;height:26px;border-radius:6px;overflow:hidden;background:rgba(70,88,158,.08)}
+.sparkfill{height:100%;width:0;transition:width 1.3s cubic-bezier(.16,.8,.3,1);
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='26' height='26'%3E%3Cg fill='%236d83bd'%3E%3Crect x='0' y='0' width='13' height='13'/%3E%3Crect x='13' y='13' width='13' height='13'/%3E%3C/g%3E%3C/svg%3E");
+  background-size:13px 13px}
+.in .sparkfill{width:var(--w)}
+
+/* ===== back to top ===== */
+.totop{display:flex;align-items:center;gap:12px;justify-content:center;margin:0 auto;width:fit-content;cursor:pointer;background:transparent;border:none;font-family:var(--sans);font-weight:700;font-size:.85rem;letter-spacing:.04em;color:var(--ink);padding:20px}
+.totop .circ{width:48px;height:48px;border-radius:50%;border:1.6px solid rgba(20,20,30,.25);display:flex;align-items:center;justify-content:center;font-size:1.2rem;transition:transform .3s,background .3s,color .3s}
+.totop:hover .circ{transform:translateY(-4px);background:var(--ink);color:#fff;border-color:var(--ink)}
+</style>
+</head>
+<body>
+
+<!-- ===================== NAV ===================== -->
+<header class="nav" id="nav">
+  <a href="#top" class="brandlock" aria-label="Hey Workshop home">
+    <img src="assets/logo-black.png" alt="hey workshop" />
+    <span class="slash">The System</span>
+  </a>
+  <button class="menubtn" id="menuOpen" aria-label="Open menu">
+    <span class="lbl">Menu</span>
+    <span class="dot"><span></span></span>
+  </button>
+</header>
+
+<!-- ===================== OVERLAY MENU ===================== -->
+<div class="overlay" id="overlay" aria-hidden="true">
+  <div class="overlay-top">
+    <img src="assets/logo-white.png" alt="hey workshop" />
+    <button class="closebtn" id="menuClose" aria-label="Close menu">✕</button>
+  </div>
+  <nav>
+    <a href="#problem" data-close><span class="num">01</span>The Problem</a>
+    <a href="#system" data-close><span class="num">02</span>The System</a>
+    <a href="#modules" data-close><span class="num">03</span>The Modules</a>
+    <a href="#proof" data-close><span class="num">04</span>The Proof</a>
+    <a href="#pricing" data-close><span class="num">05</span>Pricing</a>
+    <a href="#faq" data-close><span class="num">06</span>Questions</a>
+  </nav>
+  <div class="overlay-foot">
+    <a href="https://heyworkshop.gumroad.com" target="_blank" rel="noopener">heyworkshop.gumroad.com</a>
+    <span>Built for freelancers, consultants &amp; solo founders</span>
+  </div>
+</div>
+
+<div class="sheet" id="top">
+
+  <!-- ===================== HERO ===================== -->
+  <section class="hero">
+    <div class="pixbg"></div>
+    <!-- pixel sprites -->
+    <svg class="px g" data-parallax="0.35" style="right:5%;top:14%;width:120px" viewBox="0 0 100 100"><rect x="40" y="0" width="20" height="20"/><rect x="20" y="20" width="20" height="20"/><rect x="60" y="20" width="20" height="20"/><rect x="40" y="40" width="20" height="20"/><rect x="0" y="40" width="20" height="20"/><rect x="80" y="40" width="20" height="20"/><rect x="20" y="60" width="20" height="20"/><rect x="60" y="60" width="20" height="20"/><rect x="40" y="80" width="20" height="20"/></svg>
+    <svg class="px g" data-parallax="0.6" style="left:2%;bottom:8%;width:86px;animation-delay:.8s" viewBox="0 0 100 100"><rect x="40" y="0" width="20" height="20"/><rect x="20" y="20" width="20" height="20"/><rect x="60" y="20" width="20" height="20"/><rect x="40" y="40" width="20" height="20"/><rect x="0" y="40" width="20" height="20"/><rect x="80" y="40" width="20" height="20"/><rect x="20" y="60" width="20" height="20"/><rect x="60" y="60" width="20" height="20"/><rect x="40" y="80" width="20" height="20"/></svg>
+    <svg class="px b" style="left:6%;top:20%;width:70px" viewBox="0 0 100 100"><rect x="40" y="0" width="20" height="20"/><rect x="20" y="20" width="20" height="20"/><rect x="60" y="20" width="20" height="20"/><rect x="40" y="40" width="20" height="20"/><rect x="0" y="40" width="20" height="20"/><rect x="80" y="40" width="20" height="20"/><rect x="20" y="60" width="20" height="20"/><rect x="60" y="60" width="20" height="20"/><rect x="40" y="80" width="20" height="20"/></svg>
+    <svg class="px pe" data-parallax="0.25" style="left:46%;bottom:14%;width:54px;animation-delay:1.2s" viewBox="0 0 100 100"><rect x="40" y="0" width="20" height="20"/><rect x="20" y="20" width="20" height="20"/><rect x="60" y="20" width="20" height="20"/><rect x="40" y="40" width="20" height="20"/><rect x="0" y="40" width="20" height="20"/><rect x="80" y="40" width="20" height="20"/><rect x="20" y="60" width="20" height="20"/><rect x="60" y="60" width="20" height="20"/><rect x="40" y="80" width="20" height="20"/></svg>
+
+    <div class="hero-sticker" data-parallax="0.4">
+      <span class="bubble sent" style="transform:rotate(-4deg)">you've got this&nbsp;✦</span>
+      <img class="badge-sticker" src="assets/icon-badge.png" alt="" />
+      <span class="bubble recv" style="transform:rotate(3deg);align-self:flex-start">…but the admin? oof.</span>
+    </div>
+
+    <div class="hero-inner">
+      <p class="eyebrow" data-reveal>Hey Workshop — the back office for people who work for themselves</p>
+      <h1 data-reveal class="d1">
+        Running solo means<br/>
+        doing <span class="mk m-lime tall">everything.</span><br/>
+        <span class="script">We built the system.</span>
+      </h1>
+      <p class="serif-body hero-dek" data-reveal>
+        The complete back office for freelancers, consultants, and solo founders — nearly
+        <b class="dim">200 pages</b> of research-backed playbooks plus <b class="dim">50+ done-for-you</b>
+        templates, trackers, and scripts. One connected system instead of a hundred browser tabs.
+      </p>
+      <div class="cta-row" data-reveal class="d2">
+        <a class="btn btn-primary" href="https://heyworkshop.gumroad.com/l/solo-business-os" target="_blank" rel="noopener">
+          Get the Solo Business OS
+          <span class="price"><s>$199</s>$149</span>
+        </a>
+        <a class="btn btn-ghost" href="#system">See what's inside ↓</a>
+      </div>
+      <div class="hero-meta" data-reveal class="d3">
+        <span><b>7</b> modules</span>
+        <span><b>$0</b> subscriptions</span>
+        <span><b>Excel · Sheets · Word · Docs</b></span>
+        <span><b>30-day</b> money-back</span>
+      </div>
+    </div>
+
+    <div class="scrollcue"><span>scroll</span><span class="line"></span></div>
+  </section>
+
+  <!-- ===================== INTRO STATEMENT ===================== -->
+  <section class="section w-pink" id="intro">
+    <svg class="px pk" data-parallax="0.3" style="right:8%;top:18%" viewBox="0 0 100 100"><rect x="40" y="0" width="20" height="20"/><rect x="20" y="20" width="20" height="20"/><rect x="60" y="20" width="20" height="20"/><rect x="40" y="40" width="20" height="20"/><rect x="0" y="40" width="20" height="20"/><rect x="80" y="40" width="20" height="20"/><rect x="20" y="60" width="20" height="20"/><rect x="60" y="60" width="20" height="20"/><rect x="40" y="80" width="20" height="20"/></svg>
+    <div class="wrap narrow center" data-reveal>
+      <p class="statement lg">
+        You went out on your own to do the work you <span class="mk m-pink">love</span> —
+        not to become an accountant, a salesperson, and a lawyer. But running solo means wearing all
+        <span class="mk m-lav">forty hats</span> at once.
+      </p>
+      <p class="eyebrow" style="margin-top:2rem;display:block">The system that runs underneath the work — now in one place.</p>
+    </div>
+  </section>
+
+  <!-- ===================== PROBLEM ===================== -->
+  <section class="section w-cream" id="problem">
+    <svg class="px g" data-parallax="0.5" style="left:3%;bottom:10%;width:64px" viewBox="0 0 100 100"><rect x="0" y="40" width="20" height="20"/><rect x="20" y="20" width="20" height="20"/><rect x="20" y="60" width="20" height="20"/><rect x="40" y="0" width="20" height="20"/><rect x="40" y="40" width="20" height="20"/><rect x="40" y="80" width="20" height="20"/><rect x="60" y="20" width="20" height="20"/><rect x="60" y="60" width="20" height="20"/><rect x="80" y="40" width="20" height="20"/></svg>
+    <div class="wrap cols">
+      <div data-reveal>
+        <p class="kicker" style="margin-bottom:1.2rem">The honest part nobody warned you about</p>
+        <h2 class="lead">
+          That's not a <span class="mk m-mint">you</span> problem.<br/>It's a <span class="mk m-blue">systems</span> problem.
+        </h2>
+        <p class="serif-body" style="margin-top:1.4rem">
+          So you wing it — and every gap quietly costs you real money. The people who look like they
+          have it all together simply built, or bought, the back office that runs underneath the work.
+        </p>
+      </div>
+      <div data-reveal class="d1">
+        <ul class="leaks">
+          <li>The <b>invoice that never got paid</b> because there was no contract.</li>
+          <li>The <b>project that ballooned for free</b> because the scope was never written down.</li>
+          <li>The <b>empty pipeline</b>, because outreach only happens when panic hits.</li>
+          <li>The <b>tax bill that blindsided you</b> because nothing was set aside.</li>
+          <li>The <b>rate you were too nervous to raise</b>, year after year.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== TOGGLE ===================== -->
+  <section class="section w-mint" id="toggle">
+    <div class="wrap center" data-reveal>
+      <p class="kicker" style="margin-bottom:1rem">Same you. Different system.</p>
+      <h2 class="statement">Running solo, <span class="mk m-mint">two ways.</span></h2>
+    </div>
+    <div class="switchwrap" data-reveal>
+      <div class="switch" id="abSwitch" data-mode="before">
+        <span class="glider"></span>
+        <button class="on" data-mode="before">Winging it</button>
+        <button data-mode="after">With the system</button>
+      </div>
+    </div>
+    <div class="swapwrap" data-reveal>
+      <div class="swap" data-when="before">
+        <div class="swapcard bad"><span class="big">1 in 4</span><p>invoices paid late — or never — because there was no contract.</p></div>
+        <div class="swapcard bad"><span class="big">$0</span><p>set aside for tax, until April punches you in the face.</p></div>
+        <div class="swapcard bad"><span class="big">11&nbsp;pm</span><p>scrambles to write a proposal from scratch, again.</p></div>
+        <div class="swapcard bad"><span class="big">Years</span><p>stuck at the same rate, too nervous to raise it.</p></div>
+      </div>
+      <div class="swap" data-when="after" hidden>
+        <div class="swapcard good"><span class="big">Every invoice</span><p>tracked and chased automatically — with a contract behind it.</p></div>
+        <div class="swapcard good"><span class="big">Auto set-aside</span><p>the Finance OS tells you exactly what to keep for tax, every time you're paid.</p></div>
+        <div class="swapcard good"><span class="big">2 minutes</span><p>to send a proposal with three pricing options built in.</p></div>
+        <div class="swapcard good"><span class="big">Rate-raise</span><p>planner that shows you when and how to charge what you're worth.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== GIANT WORD ===================== -->
+  <section class="section w-peri" id="bigword">
+    <div class="wrap center" data-reveal>
+      <p class="giant">
+        <span class="top">stop running on</span>
+        <span class="big"><span class="block-hl" style="--bhc:var(--imsg)">duct&nbsp;tape</span></span>
+        <span class="big" style="font-size:clamp(2.4rem,9vw,7rem);margin-top:.1em;display:block">&amp; <span class="script" style="color:var(--peri-deep)">hope.</span></span>
+      </p>
+    </div>
+  </section>
+
+  <!-- ===================== SYSTEM INTRO ===================== -->
+  <section class="section w-sky" id="system">
+    <div class="wrap narrow center" data-reveal>
+      <p class="kicker" style="margin-bottom:1.2rem">The Hey Workshop method</p>
+      <h2 class="statement">
+        Everything you need to run the business, <span class="mk m-blue">in one place.</span>
+      </h2>
+      <p class="serif-body" style="margin-top:1.6rem;max-width:62ch;margin-inline:auto">
+        Each module is two things: a <b class="dim">Playbook</b> that teaches you what to do and why —
+        built on named research and real case studies — and a <b class="dim">Toolkit</b> of done-for-you
+        spreadsheets, templates, and scripts that turn it into action. Read a chapter, fill in the matching tab.
+      </p>
+    </div>
+  </section>
+
+  <!-- ===================== ASSEMBLE ===================== -->
+  <section class="section w-cream" id="assemble">
+    <div class="pixbg" style="opacity:.3"></div>
+    <div class="wrap center" data-reveal>
+      <p class="kicker" style="margin-bottom:1rem">Assemble your entire back office</p>
+      <h2 class="statement lg">Everything that runs <span class="mk m-peri">underneath</span> the work.</h2>
+    </div>
+    <div class="collage-stage" data-reveal>
+      <div class="stage-center">
+        <img class="stage-badge" src="assets/icon-badge.png" alt="" />
+        <span class="stage-label">your back office</span>
+      </div>
+      <div class="cut c-dash float" data-parallax="0.5">
+        <span class="ct">Profit dashboard</span>
+        <span class="big" style="color:var(--peri-deep)">$8,240</span>
+        <div class="minibars"><span style="height:40%"></span><span style="height:62%"></span><span style="height:48%"></span><span style="height:84%"></span><span style="height:68%"></span><span style="height:100%"></span></div>
+      </div>
+      <div class="cut c-invoice float" data-parallax="0.3" style="animation-delay:1s">
+        <span class="ct">Invoice · paid ✓</span>
+        <div class="lines"><i style="width:90%"></i><i style="width:70%"></i><i style="width:82%"></i></div>
+        <span class="big">$3,500</span>
+      </div>
+      <div class="cut c-contract float" data-parallax="0.62" style="animation-delay:.5s">
+        <span class="ct">Service agreement</span>
+        <div class="lines"><i style="width:95%"></i><i style="width:86%"></i></div>
+        <div class="sigline">Alex</div>
+        <span class="stamp">SIGNED</span>
+      </div>
+      <div class="cut note c-note float" data-parallax="0.4" style="animation-delay:1.5s">
+        <span class="ct" style="color:#5b6a1f">Sticky note</span>
+        <span class="nt">Raise your rate ✶ (finally)</span>
+      </div>
+      <div class="cut chip-pill c-chip" data-parallax="0.22">50+ done-for-you templates</div>
+      <span class="bubble sent c-bub" data-parallax="0.36">tax set aside ✓</span>
+    </div>
+  </section>
+
+  <div class="pixdiv"></div>
+
+  <!-- ===================== MODULES ===================== -->
+  <section class="section w-lav" id="modules">
+    <div class="wrap">
+      <div class="center" data-reveal>
+        <p class="eyebrow">Seven operating systems. One business.</p>
+        <h2 class="statement lg" style="margin-top:.4rem">The Modules</h2>
+      </div>
+      <div class="modules-grid">
+        <article class="mod" data-reveal style="--modwash:linear-gradient(135deg,rgba(163,198,218,.35),transparent 60%)">
+          <span class="n">01</span>
+          <h3>Launch &amp; Validate OS</h3>
+          <p>From a fuzzy idea to your first paying customer — ideation, demand-testing, offer design, pricing, and a 30-day launch plan.</p>
+          <span class="tag">25-page playbook · 7-tab toolkit</span>
+        </article>
+        <article class="mod" data-reveal class="d1" style="--modwash:linear-gradient(135deg,rgba(166,178,230,.35),transparent 60%)">
+          <span class="n">02</span>
+          <h3>Clients OS</h3>
+          <p>Fill your pipeline and end feast-or-famine — positioning, warm &amp; cold outreach, discovery calls, proposals, follow-up and referrals.</p>
+          <span class="tag">22-page playbook · 8-tab CRM</span>
+        </article>
+        <article class="mod" data-reveal style="--modwash:linear-gradient(135deg,rgba(182,236,201,.4),transparent 60%)">
+          <span class="n">03</span>
+          <h3>Delivery &amp; Operations OS</h3>
+          <p>Wow clients and protect your time — onboarding, project management, SOPs, scope control, and a referral-winning handoff.</p>
+          <span class="tag">18-page playbook · 7-tab toolkit</span>
+        </article>
+        <article class="mod" data-reveal class="d1" style="--modwash:linear-gradient(135deg,rgba(247,201,222,.4),transparent 60%)">
+          <span class="n">04</span>
+          <h3>Legal &amp; Admin OS</h3>
+          <p>Get paid and stay protected — a full contract pack: MSA, SOW, contractor agreement, mutual NDA, IP assignment, late-payment letters.</p>
+          <span class="tag">14-page playbook · contract pack</span>
+        </article>
+        <article class="mod" data-reveal style="--modwash:linear-gradient(135deg,rgba(221,199,242,.4),transparent 60%)">
+          <span class="n">05</span>
+          <h3>Brand &amp; Marketing OS</h3>
+          <p>Get known and grow an audience you own — search, content &amp; storytelling, full TikTok/Instagram/Reels playbooks, email and funnels.</p>
+          <span class="tag">50-page playbook · 50 prompts</span>
+        </article>
+        <article class="mod" data-reveal class="d1" style="--modwash:linear-gradient(135deg,rgba(163,198,218,.35),transparent 60%)">
+          <span class="n">06</span>
+          <h3>Growth &amp; Scale OS</h3>
+          <p>Earn more without working more — pricing science, productizing, recurring revenue, unit economics and Profit First.</p>
+          <span class="tag">34-page playbook · 7-tab toolkit</span>
+        </article>
+        <article class="mod feature" data-reveal>
+          <span class="n">07 — the flagship</span>
+          <h3>Finance OS</h3>
+          <p>Know your real profit, beat tax season, and price for profit. A 9-tab money command center — dashboard, income, expenses, invoices, tax center, rate calculator — plus the Money Playbook, Business Pack, and Growth Pack.</p>
+          <span class="tag">9-tab command center · Money Playbook</span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== DASHBOARD MOCKUP ===================== -->
+  <section class="section w-cream" id="inaction">
+    <div class="ghostword" aria-hidden="true">SYSTEM</div>
+    <div class="wrap center" data-reveal>
+      <p class="kicker" style="margin-bottom:1rem">See it in action</p>
+      <h2 class="statement">Your numbers, <span class="mk m-blue">finally clear.</span></h2>
+      <p class="serif-body" style="max-width:56ch;margin:1.2rem auto 0">A peek inside the Finance OS — a 9-tab money command center that does the math for the rest of the year.</p>
+    </div>
+    <div class="dashwrap" data-reveal>
+      <div class="dashmock">
+        <div class="dashbar"><span class="dot" style="background:#ff5f57"></span><span class="dot" style="background:#febc2e"></span><span class="dot" style="background:#28c840"></span><span class="t">Finance OS — Dashboard</span></div>
+        <div class="dashtabs"><span class="act">Dashboard</span><span>Income</span><span>Expenses</span><span>Invoices</span><span>Tax Center</span><span>Rate Calculator</span><span>Mileage</span></div>
+        <div class="dashbody">
+          <div class="dashL">
+            <div class="kpi">
+              <div class="k"><div class="lab">Net profit · YTD</div><div class="val up">$48,210</div></div>
+              <div class="k"><div class="lab">Set aside for tax</div><div class="val peri">$11,290</div></div>
+              <div class="k"><div class="lab">Effective rate</div><div class="val">$92/hr</div></div>
+            </div>
+            <div class="lab" style="font-family:var(--sans);font-weight:600;font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint)">Monthly income</div>
+            <div class="dashchart">
+              <span style="--h:42%"></span><span style="--h:58%"></span><span style="--h:50%"></span><span style="--h:71%"></span><span style="--h:63%"></span><span style="--h:88%"></span><span style="--h:76%"></span><span style="--h:100%"></span>
+            </div>
+            <span class="dashtag">Updates as you type ✦</span>
+          </div>
+          <div class="dashR">
+            <div class="sheetrow head"><span>Recent</span><span style="text-align:right">Amount</span><span style="text-align:right">Status</span></div>
+            <div class="sheetrow"><span>Acme Co · retainer</span><span class="pos">+$3,500</span><span style="text-align:right;color:#1f9d63">Paid</span></div>
+            <div class="sheetrow"><span>Studio Bloom · project</span><span class="pos">+$2,200</span><span style="text-align:right;color:var(--peri-deep)">Sent</span></div>
+            <div class="sheetrow"><span>Software · tools</span><span class="neg">-$120</span><span style="text-align:right;color:var(--ink-faint)">Expense</span></div>
+            <div class="sheetrow"><span>Tax set-aside (auto)</span><span class="neg">-$945</span><span style="text-align:right;color:var(--ink-faint)">Reserved</span></div>
+            <div class="sheetrow"><span>Northwind · invoice</span><span class="pos">+$4,800</span><span style="text-align:right;color:#c2415f">Overdue</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PROOF / NUMBERS ===================== -->
+  <section class="section w-mint" id="proof">
+    <div class="wrap">
+      <div class="center" data-reveal>
+        <p class="kicker" style="margin-bottom:1rem">What's inside, by the numbers</p>
+        <h2 class="statement">Substance you can <span class="mk m-mint">feel</span> on day one.</h2>
+      </div>
+
+      <div class="numgrid">
+        <div class="numcell pop" data-reveal><div class="v" data-count="200" data-suffix="+">0</div><div class="l">pages of playbooks</div></div>
+        <div class="numcell pop" data-reveal class="d1"><div class="v" data-count="8">0</div><div class="l">research-backed guides</div></div>
+        <div class="numcell pop" data-reveal class="d2"><div class="v" data-count="50" data-suffix="+">0</div><div class="l">templates, trackers &amp; scripts</div></div>
+        <div class="numcell pop" data-reveal class="d3"><div class="v" data-count="7">0</div><div class="l">connected modules</div></div>
+        <div class="numcell pop" data-reveal class="d4"><div class="v">$0</div><div class="l">subscriptions, ever</div></div>
+      </div>
+
+      <!-- which would you rather (A/B) -->
+      <div class="center" data-reveal style="margin-top:5rem">
+        <p class="kicker" style="margin-bottom:1rem">Which would you rather?</p>
+        <h3 class="statement" style="font-size:clamp(1.4rem,3vw,2.2rem)">Buy the pieces one by one, or save <span class="mk m-lime">hundreds.</span></h3>
+      </div>
+      <div class="ab" data-reveal>
+        <div class="abcol">
+          <div class="cap">Six modules at $39 each, plus the Finance OS flagship at $79 — bought separately</div>
+          <div class="abbar lose" style="--h:300px"><span class="v">$313</span></div>
+          <div class="lab">Piece by piece</div>
+        </div>
+        <div class="abcol">
+          <div class="cap">The complete Solo Business OS — every module, one payment, yours forever</div>
+          <div class="abbar win" style="--h:150px"><span class="v">$149</span></div>
+          <div class="lab">The bundle</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== RESEARCH MARQUEE ===================== -->
+  <section class="section w-cream" style="padding-top:0" id="research">
+    <div class="wrap center" data-reveal style="margin-bottom:2.4rem">
+      <p class="serif-body" style="max-width:60ch;margin-inline:auto">
+        This is not recycled blog fluff. Every playbook is built on <b class="dim">named sources</b> and
+        <b class="dim">real case studies</b> — with the receipts cited at the back of every guide.
+      </p>
+    </div>
+    <div class="marquee" aria-hidden="true">
+      <div class="track">
+        <span>Harvard Business Review</span><i class="dot"></i><span>McKinsey</span><i class="dot"></i><span>Bain</span><i class="dot"></i><span>GWI</span><i class="dot"></i><span>TikTok</span><i class="dot"></i><span>Meta</span><i class="dot"></i><span>Dropbox</span><i class="dot"></i><span>Airbnb</span><i class="dot"></i><span>Stripe</span><i class="dot"></i><span>Buffer</span><i class="dot"></i><span>Zappos</span><i class="dot"></i><span>Pebble</span><i class="dot"></i>
+        <span>Harvard Business Review</span><i class="dot"></i><span>McKinsey</span><i class="dot"></i><span>Bain</span><i class="dot"></i><span>GWI</span><i class="dot"></i><span>TikTok</span><i class="dot"></i><span>Meta</span><i class="dot"></i><span>Dropbox</span><i class="dot"></i><span>Airbnb</span><i class="dot"></i><span>Stripe</span><i class="dot"></i><span>Buffer</span><i class="dot"></i><span>Zappos</span><i class="dot"></i><span>Pebble</span><i class="dot"></i>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== WHAT CHANGES ===================== -->
+  <section class="section w-sky" id="changes">
+    <div class="wrap">
+      <div class="center" data-reveal style="margin-bottom:1rem">
+        <p class="eyebrow">What changes when you have it</p>
+      </div>
+      <div class="bubblestats" style="margin-inline:auto">
+        <div class="bstat pop" data-reveal>
+          <span class="bubble recv">One connected system instead of a hundred browser tabs.</span>
+        </div>
+        <div class="bstat pop" data-reveal class="d1">
+          <span class="bubble sent">A real win this week — every module turns straight into action.</span>
+        </div>
+        <div class="bstat pop" data-reveal class="d2">
+          <span class="bubble recv">The expensive leaks — plugged: unpaid invoices, scope creep, underpricing.</span>
+        </div>
+        <div class="bstat pop" data-reveal class="d3">
+          <span class="bubble sent">Decisions made with confidence, backed by real research.</span>
+        </div>
+      </div>
+      <div class="center" data-reveal style="margin-top:3rem">
+        <p class="statement" style="font-size:clamp(1.5rem,3.4vw,2.6rem)">You finally feel <span class="mk m-blue">in control.</span> Calm, repeatable systems replace the 11&nbsp;pm scramble.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== QUOTE + TESTIMONIALS ===================== -->
+  <section class="section w-cream" id="voices">
+    <div class="wrap">
+      <div class="quote" data-reveal>
+        <q>You didn't start your own thing to become an accountant, a salesperson, and a lawyer… but that's part of it when you're running solo. This is the system that helps — a lot.</q>
+        <div class="by">
+          <span class="av"></span>
+          <span class="who"><b>The Hey Workshop promise</b><span>why we built it</span></span>
+        </div>
+      </div>
+
+      <div class="thread" data-reveal>
+        <div class="row you"><span class="av"></span><div><p class="nm">Priya · freelance designer</p><span class="msg">anyone have a solid client contract? just got burned on an unpaid invoice 😩</span></div></div>
+        <div class="row me"><span class="msg">Hey Workshop's Legal &amp; Admin OS — MSA, SOW + late-payment letters. Got me paid within a week.</span></div>
+        <div class="row you"><span class="av"></span><div><p class="nm">Marcus · consultant</p><span class="msg">the pipeline CRM ended my feast-or-famine months. I actually know what's next now.</span></div></div>
+        <div class="row me"><span class="msg">same 🙌 and tax season went from brutal to boring — the Finance OS sets aside the right amount every time I'm paid.</span></div>
+        <div class="row you"><span class="av"></span><div><p class="nm">Dana · solo founder</p><span class="msg">replaced like six tools + a folder of half-finished spreadsheets. one recovered invoice paid for the whole thing.</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== REPLACES (sparklines) ===================== -->
+  <section class="section w-lav" id="replaces">
+    <div class="wrap">
+      <div class="center" data-reveal>
+        <p class="kicker" style="margin-bottom:1rem">One system, less stack</p>
+        <h2 class="statement">It quietly <span class="mk m-lav">replaces</span> the patchwork.</h2>
+      </div>
+      <div class="sparks" data-reveal>
+        <div class="sparkrow"><span class="lbl">The bookkeeper you keep meaning to hire</span><span class="lbl" style="color:var(--peri-deep)">Finance OS →</span><div class="sparktrack"><div class="sparkfill" style="--w:88%"></div></div></div>
+        <div class="sparkrow"><span class="lbl">Pricing guesswork &amp; the rate you never raise</span><span class="lbl" style="color:var(--peri-deep)">Rate calculator →</span><div class="sparktrack"><div class="sparkfill" style="--w:76%"></div></div></div>
+        <div class="sparkrow"><span class="lbl">April tax-season panic</span><span class="lbl" style="color:var(--peri-deep)">Auto set-aside →</span><div class="sparktrack"><div class="sparkfill" style="--w:92%"></div></div></div>
+        <div class="sparkrow"><span class="lbl">Amateur-looking client paperwork</span><span class="lbl" style="color:var(--peri-deep)">Contract pack →</span><div class="sparktrack"><div class="sparkfill" style="--w:81%"></div></div></div>
+        <div class="sparkrow"><span class="lbl">The empty-pipeline scramble</span><span class="lbl" style="color:var(--peri-deep)">Pipeline CRM →</span><div class="sparktrack"><div class="sparkfill" style="--w:69%"></div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== PRICING ===================== -->
+  <section class="section w-peri" id="pricing">
+    <div class="wrap">
+      <div class="center" data-reveal>
+        <p class="kicker" style="margin-bottom:1rem">Choose your level</p>
+        <h2 class="statement lg">Start where it <span class="mk m-lime">hurts most.</span></h2>
+        <p class="serif-body" style="max-width:54ch;margin:1.2rem auto 0">One-time payment. No subscriptions. Everything works in Excel, Google Sheets, Word &amp; Docs — and your data stays yours.</p>
+      </div>
+
+      <div class="prices">
+        <!-- Client-Getting Kit -->
+        <div class="price-card" data-reveal>
+          <p class="eyebrow">The starting point</p>
+          <h3>Client-Getting Kit</h3>
+          <p class="tagline">Fill your pipeline on purpose, instead of waiting and hoping.</p>
+          <div class="amt">$29</div>
+          <ul>
+            <li>50 cold outreach &amp; follow-up scripts</li>
+            <li>Cold-outreach pipeline tracker</li>
+            <li>The Proposal-to-Close Playbook</li>
+          </ul>
+          <a class="buy" href="https://heyworkshop.gumroad.com/l/client-getting-kit" target="_blank" rel="noopener">Get the Kit</a>
+        </div>
+
+        <!-- Finance OS -->
+        <div class="price-card" data-reveal class="d1">
+          <span class="tagb" style="background:var(--hl-blue)">Most popular</span>
+          <p class="eyebrow">The money system</p>
+          <h3>Freelance Finance OS</h3>
+          <p class="tagline">Know your real profit, beat tax season, price for profit.</p>
+          <div class="amt"><em>from</em> $29 <em>· Pro $79</em></div>
+          <ul>
+            <li>9-tab live finance dashboard</li>
+            <li>Auto tax set-aside &amp; rate calculator</li>
+            <li>13 tools, templates &amp; playbooks</li>
+            <li>Business Pack + Growth Pack (Pro)</li>
+          </ul>
+          <a class="buy" href="https://heyworkshop.gumroad.com/l/finance-os" target="_blank" rel="noopener">Get Finance OS</a>
+        </div>
+
+        <!-- Solo Business OS -->
+        <div class="price-card feat" data-reveal class="d2">
+          <span class="tagb">Best value</span>
+          <p class="eyebrow">Everything — the complete back office</p>
+          <h3>The Solo Business OS</h3>
+          <p class="tagline">All seven modules. ~200 pages. 50+ templates. The whole system.</p>
+          <div class="amt"><s>$199</s>$149</div>
+          <ul>
+            <li>All 7 operating-system modules</li>
+            <li>~200 pages across 8 playbooks</li>
+            <li>50+ tabs, templates, trackers &amp; scripts</li>
+            <li>Save ~$164 vs. buying separately</li>
+            <li>Free updates · own it forever</li>
+          </ul>
+          <a class="buy" href="https://heyworkshop.gumroad.com/l/solo-business-os" target="_blank" rel="noopener">Get the full system</a>
+        </div>
+      </div>
+      <p class="pay-note" data-reveal>Bought separately it's $313+. The complete system is a one-time $149.</p>
+    </div>
+  </section>
+
+  <!-- ===================== GUARANTEE ===================== -->
+  <section class="section w-cream" id="guarantee">
+    <div class="wrap">
+      <div class="guarantee" data-reveal>
+        <div class="seal">30-DAY</div>
+        <h2>Your risk is zero.</h2>
+        <p>
+          Try the entire system for 30 days. If it doesn't make running your business clearer, calmer,
+          and more profitable, email us for a full refund. One payment, no subscription, free updates —
+          and your data stays yours.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FAQ ===================== -->
+  <section class="section w-cream" id="faq">
+    <div class="wrap narrow">
+      <div class="center" data-reveal>
+        <p class="kicker" style="margin-bottom:1rem">Questions, answered</p>
+        <h2 class="statement">Before you grab it.</h2>
+      </div>
+      <div class="faq-list" data-reveal>
+        <details open><summary>How do I get it?<span class="ic"></span></summary><div class="ans">After checkout you get an instant download link by email. Open the Start Here guide first, then pick the module that solves your most pressing problem and take one small step today.</div></details>
+        <details><summary>Do I need any special software?<span class="ic"></span></summary><div class="ans">No. Everything works in Excel, Google Sheets, Word and Google Docs. No logins, no subscriptions — and it sets up in about five minutes.</div></details>
+        <details><summary>Is it beginner-friendly?<span class="ic"></span></summary><div class="ans">Yes. Every module pairs a plain-English Playbook that teaches the what and why with done-for-you tools you simply fill in. No experience required.</div></details>
+        <details><summary>Can I customize everything?<span class="ic"></span></summary><div class="ans">Absolutely. Adapt every template, tracker and script to your own business — and your data always stays yours.</div></details>
+        <details><summary>What if it's not for me?<span class="ic"></span></summary><div class="ans">Your risk is zero. Try the whole system for 30 days; if it doesn't make running your business clearer, calmer and more profitable, email us for a full refund.</div></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== FINAL CTA ===================== -->
+  <section class="section final" id="final">
+    <div class="pixbg" style="opacity:.16"></div>
+    <svg class="px b" style="left:8%;top:16%;width:60px;opacity:.7" viewBox="0 0 100 100"><rect x="40" y="0" width="20" height="20"/><rect x="20" y="20" width="20" height="20"/><rect x="60" y="20" width="20" height="20"/><rect x="40" y="40" width="20" height="20"/><rect x="0" y="40" width="20" height="20"/><rect x="80" y="40" width="20" height="20"/><rect x="20" y="60" width="20" height="20"/><rect x="60" y="60" width="20" height="20"/><rect x="40" y="80" width="20" height="20"/></svg>
+    <svg class="px p" style="right:9%;bottom:16%;width:70px;opacity:.7;animation-delay:1s" viewBox="0 0 100 100"><rect x="0" y="40" width="20" height="20"/><rect x="20" y="20" width="20" height="20"/><rect x="20" y="60" width="20" height="20"/><rect x="40" y="0" width="20" height="20"/><rect x="40" y="40" width="20" height="20"/><rect x="40" y="80" width="20" height="20"/><rect x="60" y="20" width="20" height="20"/><rect x="60" y="60" width="20" height="20"/><rect x="80" y="40" width="20" height="20"/></svg>
+    <div class="wrap" data-reveal>
+      <h2>Install the whole thing today.</h2>
+      <p>
+        The gap between the people who seem to have it all figured out and everyone else isn't talent,
+        and it isn't luck. <span class="mk m-peri" style="color:#fff">It's a system.</span> Every month you wait is
+        another unpaid invoice, another underpriced project, another empty-pipeline scramble.
+      </p>
+      <a class="btn btn-primary" href="https://heyworkshop.gumroad.com/l/solo-business-os" target="_blank" rel="noopener">
+        Get the Solo Business OS — <s style="opacity:.5;font-weight:500">$199</s>&nbsp;$149
+      </a>
+    </div>
+  </section>
+
+  <!-- ===================== BACK TO TOP ===================== -->
+  <div class="section w-cream" style="padding-top:40px;padding-bottom:40px;text-align:center">
+    <button class="totop" id="toTop"><span class="circ">↑</span> Back to top</button>
+  </div>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="footer">
+    <div class="footer-grid">
+      <div>
+        <img src="assets/logo-white.png" alt="hey workshop" />
+        <p>Research-backed systems for freelancers, consultants, and solo founders. Stop running your business on duct tape and hope.</p>
+      </div>
+      <div>
+        <h4>Products</h4>
+        <ul>
+          <li><a href="https://heyworkshop.gumroad.com/l/solo-business-os" target="_blank" rel="noopener">The Solo Business OS</a></li>
+          <li><a href="https://heyworkshop.gumroad.com/l/finance-os" target="_blank" rel="noopener">Freelance Finance OS</a></li>
+          <li><a href="https://heyworkshop.gumroad.com/l/client-getting-kit" target="_blank" rel="noopener">Client-Getting Kit</a></li>
+          <li><a href="https://heyworkshop.gumroad.com" target="_blank" rel="noopener">Browse the store →</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Explore</h4>
+        <ul>
+          <li><a href="#problem">The Problem</a></li>
+          <li><a href="#modules">The Modules</a></li>
+          <li><a href="#proof">The Proof</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#guarantee">Guarantee</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="yr"></span> Hey Workshop. All rights reserved.</span>
+      <span>One payment · No subscriptions · Your data stays yours</span>
+    </div>
+  </footer>
+
+</div><!-- /sheet -->
+
+<!-- ===================== STICKY CTA ===================== -->
+<a class="sticky-cta" id="stickyCta" href="https://heyworkshop.gumroad.com/l/solo-business-os" target="_blank" rel="noopener">
+  <span class="lbl"><b>The Solo Business OS</b> <s>$199</s>$149</span>
+  <span class="go">Get it →</span>
+</a>
+
+<script>
+/* ---------- year ---------- */
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+/* ---------- nav scroll state + sticky cta ---------- */
+const nav = document.getElementById('nav');
+const sticky = document.getElementById('stickyCta');
+let lastY = 0;
+function onScroll(){
+  const y = window.scrollY;
+  nav.classList.toggle('scrolled', y > 40);
+  sticky.classList.toggle('show', y > window.innerHeight*0.9 && y < document.body.scrollHeight - window.innerHeight*1.6);
+  /* parallax */
+  parallax(y);
+  lastY = y;
+}
+window.addEventListener('scroll', onScroll, {passive:true});
+
+/* ---------- overlay menu ---------- */
+const overlay = document.getElementById('overlay');
+const open = ()=>{overlay.classList.add('open');overlay.setAttribute('aria-hidden','false');document.body.style.overflow='hidden';};
+const close = ()=>{overlay.classList.remove('open');overlay.setAttribute('aria-hidden','true');document.body.style.overflow='';};
+document.getElementById('menuOpen').addEventListener('click', open);
+document.getElementById('menuClose').addEventListener('click', close);
+document.querySelectorAll('[data-close]').forEach(a=>a.addEventListener('click', close));
+document.addEventListener('keydown', e=>{ if(e.key==='Escape') close(); });
+
+/* ---------- reveal on scroll ---------- */
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach(en=>{
+    if(en.isIntersecting){
+      en.target.classList.add('in');
+      // count up if it has counters inside
+      en.target.querySelectorAll('[data-count]').forEach(runCount);
+      if(en.target.matches('[data-count]')) runCount(en.target);
+      io.unobserve(en.target);
+    }
+  });
+},{threshold:0.18, rootMargin:'0px 0px -8% 0px'});
+
+document.querySelectorAll('[data-reveal],.pop,[data-count]').forEach(el=>io.observe(el));
+// also observe sections so .mk markers + bars trigger via the .in class on the section/wrap
+document.querySelectorAll('.section, .hero, .wrap, .chart').forEach(el=>io.observe(el));
+
+/* ---------- count up ---------- */
+function runCount(el){
+  if(el.dataset.done) return;
+  el.dataset.done = '1';
+  const target = parseFloat(el.dataset.count);
+  const suffix = el.dataset.suffix || '';
+  const dur = 1400; const start = performance.now();
+  function tick(now){
+    const p = Math.min((now-start)/dur, 1);
+    const eased = 1 - Math.pow(1-p, 3);
+    el.textContent = Math.round(target*eased) + suffix;
+    if(p<1) requestAnimationFrame(tick);
+    else el.textContent = target + suffix;
+  }
+  requestAnimationFrame(tick);
+}
+
+/* ---------- parallax (pixel sprites + hero sticker) ---------- */
+const pItems = [...document.querySelectorAll('[data-parallax]')];
+function parallax(y){
+  pItems.forEach(el=>{
+    const rect = el.getBoundingClientRect();
+    const speed = parseFloat(el.dataset.parallax)||0.2;
+    const offset = (rect.top + window.scrollY - y - window.innerHeight/2);
+    el.style.transform = `translateY(${(-offset*speed*0.12).toFixed(1)}px)`;
+  });
+}
+
+/* ---------- before/after toggle ---------- */
+(function(){
+  const sw = document.getElementById('abSwitch');
+  if(!sw) return;
+  sw.querySelectorAll('button').forEach(b=>{
+    b.addEventListener('click', ()=>{
+      const m = b.dataset.mode;
+      sw.dataset.mode = m;
+      sw.querySelectorAll('button').forEach(x=> x.classList.toggle('on', x===b));
+      document.querySelectorAll('.swap').forEach(s=>{ s.hidden = (s.dataset.when !== m); });
+    });
+  });
+})();
+
+/* ---------- back to top ---------- */
+(function(){
+  const t = document.getElementById('toTop');
+  if(t) t.addEventListener('click', ()=> window.scrollTo({top:0, behavior:'smooth'}));
+})();
+
+/* ---------- FAQ accordion: one open at a time ---------- */
+document.querySelectorAll('.faq-list details').forEach(d=>{
+  d.addEventListener('toggle', ()=>{
+    if(d.open) d.parentElement.querySelectorAll('details').forEach(o=>{ if(o!==d) o.open=false; });
+  });
+});
+
+onScroll();
+</script>
+</body>
+</html>
