@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Hey Workshop: Watch how the Solo Business OS works</title>
+<meta name="description" content="A short walkthrough of the Solo Business OS, the complete back office for people who work for themselves. Watch, then start the thing." />
+<link rel="icon" type="image/png" href="/assets/icon-badge.png" />
+<meta name="robots" content="noindex" />
+<meta property="og:type" content="video.other" />
+<meta property="og:title" content="Hey Workshop: Watch how the Solo Business OS works" />
+<meta property="og:description" content="A short walkthrough of the complete back office for people who work for themselves. Watch, then start the thing." />
+<meta property="og:image" content="https://www.heywork.shop/VSL/poster.jpg" />
+<meta property="og:video" content="https://www.heywork.shop/VSL/heyworkshop-vsl.mp4" />
+<meta property="og:video:type" content="video/mp4" />
+<meta name="twitter:card" content="player" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Playfair+Display:ital,wght@1,500;1,600&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --cream:#F8F4EB;
+  --cream-2:#FCF9F2;
+  --ink:#16161A;
+  --ink-soft:#43444C;
+  --ink-faint:#6b6c75;
+  --periwinkle:#6D83BD;
+  --peri-deep:#46589E;
+  --peri-royal:#3B4FA0;
+  --lightblue:#A3C6DA;
+  --hl-lime:#CFF36B;
+  --sans:'Montserrat',system-ui,sans-serif;
+  --serif:'Newsreader',Georgia,serif;
+  --script:'Playfair Display',Georgia,serif;
+  --maxw:960px;
+  --gut:clamp(20px,5vw,64px);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:var(--sans);
+  color:var(--ink);
+  background:var(--cream);
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  -webkit-font-smoothing:antialiased;
+  position:relative;
+  overflow-x:hidden;
+}
+/* soft brand blobs */
+.blob{position:fixed;border-radius:50%;filter:blur(90px);z-index:0;pointer-events:none;opacity:.55}
+.blob.a{width:640px;height:640px;background:var(--lightblue);top:-260px;left:-220px}
+.blob.b{width:560px;height:560px;background:var(--hl-lime);top:-200px;right:-200px;opacity:.4}
+.blob.c{width:680px;height:680px;background:#A6B2E6;bottom:-320px;right:-240px;opacity:.4}
+header,main,footer{position:relative;z-index:1}
+
+/* header */
+header{
+  padding:26px var(--gut) 0;
+  display:flex;justify-content:center;
+}
+header a{display:inline-block}
+header img{height:34px;width:auto;display:block}
+
+/* main */
+main{
+  flex:1;
+  width:100%;
+  max-width:var(--maxw);
+  margin:0 auto;
+  padding:clamp(28px,6vw,64px) var(--gut) 40px;
+  text-align:center;
+}
+.kicker{
+  font-family:var(--sans);
+  font-weight:700;font-size:.78rem;letter-spacing:.22em;text-transform:uppercase;
+  color:var(--peri-deep);margin-bottom:16px;
+}
+h1{
+  font-family:var(--sans);
+  font-weight:800;letter-spacing:-.025em;line-height:1.04;
+  font-size:clamp(1.9rem,5vw,3rem);
+  margin:0 auto 10px;max-width:16ch;
+}
+h1 em{font-family:var(--script);font-style:italic;font-weight:600;color:var(--peri-deep)}
+.sub{
+  font-family:var(--serif);
+  font-size:clamp(1.02rem,2.2vw,1.25rem);
+  color:var(--ink-soft);line-height:1.5;max-width:52ch;margin:0 auto;
+}
+
+/* video */
+.player{
+  margin:clamp(26px,4vw,42px) auto 0;
+  width:100%;
+  border-radius:20px;
+  overflow:hidden;
+  background:#0d0d12;
+  box-shadow:0 40px 120px -40px rgba(40,46,90,.5), 0 8px 30px -12px rgba(40,46,90,.25);
+  line-height:0;
+}
+.player video{width:100%;height:auto;display:block;aspect-ratio:16/9;background:#0d0d12}
+
+/* cta */
+.cta-wrap{margin-top:clamp(28px,4vw,40px)}
+.btn{
+  font-family:var(--sans);font-weight:700;font-size:1.02rem;cursor:pointer;border:none;
+  padding:18px 34px;border-radius:40px;display:inline-flex;align-items:center;gap:12px;
+  text-decoration:none;
+  transition:transform .25s cubic-bezier(.2,1.2,.4,1),box-shadow .25s,background .25s;
+}
+.btn-primary{background:var(--ink);color:#fff;box-shadow:0 20px 44px -20px rgba(20,20,40,.7)}
+.btn-primary:hover{transform:translateY(-3px) scale(1.02);background:var(--peri-royal)}
+.btn-primary .price{background:rgba(255,255,255,.18);padding:4px 12px;border-radius:20px;font-size:.85rem}
+.btn-primary .price s{opacity:.6;margin-right:6px;font-weight:500}
+.reassure{
+  margin-top:16px;font-family:var(--serif);font-size:.95rem;color:var(--ink-faint);
+}
+
+/* footer */
+footer{
+  text-align:center;padding:30px var(--gut) 40px;
+  font-family:var(--sans);font-size:.82rem;color:var(--ink-faint);letter-spacing:.01em;
+}
+footer a{color:var(--ink-soft);text-decoration:none;border-bottom:1px solid rgba(20,20,30,.2)}
+footer a:hover{color:var(--ink)}
+
+@media (max-width:560px){
+  header img{height:30px}
+  .player{border-radius:16px}
+}
+</style>
+</head>
+<body>
+<div class="blob a"></div>
+<div class="blob b"></div>
+<div class="blob c"></div>
+
+<header>
+  <a href="/" aria-label="Hey Workshop home"><img src="/assets/logo-black.png" alt="Hey Workshop" /></a>
+</header>
+
+<main>
+  <p class="kicker">Watch this first</p>
+  <h1>The complete back office for people who <em>work for themselves</em></h1>
+  <p class="sub">Four minutes on how the Solo Business OS takes you from a fuzzy idea to a real, paying business, one honest step at a time.</p>
+
+  <div class="player">
+    <video
+      controls
+      playsinline
+      preload="metadata"
+      poster="/VSL/poster.jpg"
+      controlslist="nodownload">
+      <source src="/VSL/heyworkshop-vsl.mp4" type="video/mp4" />
+      Your browser does not support the video tag.
+      <a href="/VSL/heyworkshop-vsl.mp4">Download the video</a> instead.
+    </video>
+  </div>
+
+  <div class="cta-wrap">
+    <a class="btn btn-primary" href="https://heyworkshop.gumroad.com/l/solo-business-os" target="_blank" rel="noopener">
+      Get the Solo Business OS <span class="price"><s>$313</s> $149</span>
+    </a>
+    <p class="reassure">One-time purchase. Works in Excel and Google Sheets. Your data stays yours.</p>
+  </div>
+</main>
+
+<footer>
+  &copy; Hey Workshop &nbsp;·&nbsp; <a href="/">heywork.shop</a>
+</footer>
+</body>
+</html>
